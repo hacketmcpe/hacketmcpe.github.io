@@ -1,0 +1,23 @@
+name: Extract Zip File
+
+on:
+  push:
+    branches:
+      - main  # Change this to your default branch name if different
+
+jobs:
+  extract_zip:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+      
+    - name: Extract Zip
+      uses: montudor/action-zip@v1
+      with:
+        args: "extract assets.zip"
+
+    - name: Move Extracted Files
+      run: mv * hacketmcpe/hacketmcpe.github.io/bobfolder
+      working-directory: ${{ github.workspace }}/assets  # Change to correct path if needed
