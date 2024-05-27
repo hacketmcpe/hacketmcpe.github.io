@@ -1,0 +1,20 @@
+name: Extract ZIP and Commit
+
+on: [push]
+
+jobs:
+  extract_and_commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Extract ZIP file
+        run: unzip path/to/assets.zip -d destination-folder
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add .
+          git commit -m "Extracted and added contents of ZIP file"
+          git push
